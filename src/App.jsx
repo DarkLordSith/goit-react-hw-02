@@ -4,14 +4,12 @@ import Options from "./components/Options/Options.jsx";
 import Notification from "./components/Notification/Notification.jsx";
 
 const App = () => {
-  // Стан для збереження відгуків
   const [feedback, setFeedback] = useState({
     good: 0,
     neutral: 0,
     bad: 0,
   });
 
-  // Ефект для збереження стану у локальне сховище
   useEffect(() => {
     const savedFeedback = JSON.parse(localStorage.getItem("feedback"));
     if (savedFeedback) {
@@ -23,7 +21,6 @@ const App = () => {
     localStorage.setItem("feedback", JSON.stringify(feedback));
   }, [feedback]);
 
-  // Функція для оновлення відгуків
   const updateFeedback = (type) => {
     setFeedback((prevState) => ({
       ...prevState,
@@ -31,7 +28,6 @@ const App = () => {
     }));
   };
 
-  // Функція для скидання всіх відгуків
   const resetFeedback = () => {
     setFeedback({
       good: 0,
@@ -40,10 +36,8 @@ const App = () => {
     });
   };
 
-  // Обчислення загальної кількості відгуків
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
-  // Обчислення відсотка позитивних відгуків
   const positiveFeedbackPercentage = totalFeedback
     ? Math.round((feedback.good / totalFeedback) * 100)
     : 0;
